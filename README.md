@@ -12,11 +12,58 @@ Laravel_Repository\Infraestructure\Repositories //Here you can find the Eloquent
 Laravel_Repository\Providers //For manage dependencies within your Project I used it for add a custom UserServiceProvider
 ```
 There are some interfaces and classes that I created to implement the Repository Pattern in this project:
+
+Laravel_Repository\Domain\Repositories\UserRepositoryInterface.php -> Interface for the User Entity|Model with the User related functionality blueprint.
+
+```php
+<?php namespace Laravel_Repository\Domain\Repositories;
+
+interface UserRepositoryInterface {
+    public function findByName($name);
+    public function findByEmail($email);
+}
 ```
-Laravel_Repository\Domain\Repositories\UserRepositoryInterface.php //Interface for the User Entity|Model with the User related functionality blueprint.
-Laravel_Repository\Infraestructure\Repositories\EloquentRepository.php //Base Eloquent Repository Class
-Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository.php //User specific eloquent repository implementation class it inherits the functionality from the EloquentRepository abstract class and implements specific functionality from UserRepositoryInterface
-Laravel_Repository\Providers\UserServiceProvider.php //Provides you one way to bind one specific Class to the UserRepositoryInterface. Here you could select the class that you need for each datasource (MySQL Table, XML, Array, ...)
+Laravel_Repository\Infraestructure\Repositories\EloquentRepository.php -> Base Eloquent Repository Class
+
+```php
+<?php namespace Laravel_Repository\Infraestructure\Repositories;
+
+abstract class EloquentRepository {
+    protected $model;
+    
+    public function __construct($model)
+    {
+        $this->model = $model;   
+    }
+    
+    public function getAll()
+    {
+        return $this->model->all();
+    }    
+}
+```
+Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository.php -> User specific eloquent repository implementation class it inherits the functionality from the EloquentRepository abstract class and implements specific functionality from UserRepositoryInterface
+
+```php
+<?php namespace Laravel_Repository\Infraestructure\Repositories;
+
+use Laravel_Repository\Infraestructure\Repositories\EloquentRepository;
+use Laravel_Repository\Domain\Repositories\UserRepositoryInterface;
+
+class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface {
+    public function __construct(\Laravel_Repository\User $model)
+    {
+        parent::__construct($model);
+    }
+    
+    public function findByEmail($email) {
+        return $this->model->whereEmail($email)->first();
+    }
+
+    public function findByName($name) {
+        return $this->model->whereName($name)->first();
+    }
+}
 ```
 
 Some other files that I used or changed:
