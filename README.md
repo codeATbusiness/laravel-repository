@@ -20,8 +20,10 @@ Laravel_Repository\Providers\UserServiceProvider.php //Provides you one way to b
 ```
 
 Some other files that I used or changed:
+
+## UserController.php
+
 ```php
-//UserController
 <?php namespace Laravel_Repository\Http\Controllers;
 
 use Laravel_Repository\Http\Requests;
@@ -49,8 +51,11 @@ class UserController extends Controller {
         return \View::make('users.user', compact('user'));
     }
 }
+```
 
-//UserServiceProvider
+## UserServiceProvider.php
+
+```php
 <?php namespace Laravel_Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -69,11 +74,13 @@ class UserServiceProvider extends ServiceProvider {
                         'Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository');
 	}
 }
+```
 
-//Routes.php
+## Routes.php
+
+```php
 Route::get('users/all','UserController@retrieveAllUsers');
 Route::get('users/{username}', 'UserController@retrieveUsersByName');
-
 ```
 If you want to change your datasource for example to Array only need follow the next steps:
 
