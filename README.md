@@ -21,7 +21,7 @@ Laravel_Repository\Providers\UserServiceProvider.php //Provides you one way to b
 
 Some other files that I used or changed:
 
-## UserController.php
+### UserController.php
 
 ```php
 <?php namespace Laravel_Repository\Http\Controllers;
@@ -31,10 +31,12 @@ use Laravel_Repository\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use Laravel_Repository\Domain\Repositories\UserRepositoryInterface;
+
 class UserController extends Controller {
 
     public $usersRepo;
-    public function __construct(\Laravel_Repository\Domain\Repositories\UserRepositoryInterface $usersRepo)
+    public function __construct(UserRepositoryInterface $usersRepo)
     {
         $this->usersRepo = $usersRepo;
     }
@@ -53,7 +55,7 @@ class UserController extends Controller {
 }
 ```
 
-## UserServiceProvider.php
+### UserServiceProvider.php
 
 ```php
 <?php namespace Laravel_Repository\Providers;
@@ -69,19 +71,49 @@ class UserServiceProvider extends ServiceProvider {
 
 	public function register()
 	{
-		$this->app->bind(
-                        'Laravel_Repository\Domain\Repositories\UserRepositoryInterface',
-                        'Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository');
+            $this->app->bind(
+                'Laravel_Repository\Domain\Repositories\UserRepositoryInterface',
+                'Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository');
 	}
 }
 ```
 
-## Routes.php
+### Routes.php
 
 ```php
 Route::get('users/all','UserController@retrieveAllUsers');
 Route::get('users/{username}', 'UserController@retrieveUsersByName');
 ```
+
+### UserTableSeeder.php
+
+```php
+<?php
+use Laravel_Repository\User;
+use Illuminate\Database\Seeder;
+
+class UserTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('users')->delete();
+
+        $user1 = new User;
+        $user1->name = 'Usuario_1';
+        $user1->email = 'usuario1@test.com';
+        $user1->password = Hash::make('1234');
+        $user1->save();
+        
+        $user2 = new User;
+        $user2->name = 'Usuario_2';
+        $user2->email = 'usuario2@test.com';
+        $user2->password = Hash::make('5678');
+        $user2->save();
+    }
+
+}
+```
+
 If you want to change your datasource for example to Array only need follow the next steps:
 
 1. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called ArrayRepository.

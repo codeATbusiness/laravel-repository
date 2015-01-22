@@ -5,10 +5,13 @@ use Laravel_Repository\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use Laravel_Repository\Domain\Repositories\UserRepositoryInterface;
+
+
 class UserController extends Controller {
 
     public $usersRepo;
-    public function __construct(\Laravel_Repository\Domain\Repositories\UserRepositoryInterface $usersRepo)
+    public function __construct(UserRepositoryInterface $usersRepo)
     {
         $this->usersRepo = $usersRepo;
     }
