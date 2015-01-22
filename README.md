@@ -144,9 +144,9 @@ Within the resources\views folder I created some test view:
 
 If you want to change your datasource for example to Array only need follow the next steps:
 
-1. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called ArrayRepository.
-2. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called UserArrayRepository.
-3. Change your Service Provider class `UserServiceProvider.php` to use the UserArrayRepository class that Implements UserRepositoryInterface.
+1. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called `ArrayRepository`.
+2. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called `UserArrayRepository`.
+3. Change your Service Provider class `UserServiceProvider.php` to use the `UserArrayRepository` class that Implements `UserRepositoryInterface`.
 
 You may need to run `composer dump-autoload` within your CLI console developing environment.
 
