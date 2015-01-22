@@ -3,7 +3,7 @@
 use Laravel_Repository\Infraestructure\Repositories\EloquentRepository;
 use Laravel_Repository\Domain\Repositories\UserRepositoryInterface;
 
-class UserRepository extends EloquentRepository implements UserRepositoryInterface {
+class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface {
     public function __construct(\Laravel_Repository\User $model)
     {
         parent::__construct($model);

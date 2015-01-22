@@ -13,8 +13,4 @@ abstract class EloquentRepository {
         return $this->model->all();
     }
     
-    public function getPaginated()
-    {
-        
-    }
 }

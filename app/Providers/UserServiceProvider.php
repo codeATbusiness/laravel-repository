@@ -23,7 +23,7 @@ class UserServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
                         'Laravel_Repository\Domain\Repositories\UserRepositoryInterface',
-                        'Laravel_Repository\Infraestructure\Repositories\UserRepository');
+                        'Laravel_Repository\Infraestructure\Repositories\UserEloquentRepository');
 	}
 
 }
