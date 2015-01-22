@@ -19,3 +19,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('users/all','UserController@retrieveAllUsers');
+
+Route::get('users/{username}', 'UserController@retrieveUsersByName');

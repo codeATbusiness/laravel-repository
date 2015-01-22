@@ -144,6 +144,7 @@ return [
 		'Laravel_Repository\Providers\ConfigServiceProvider',
 		'Laravel_Repository\Providers\EventServiceProvider',
 		'Laravel_Repository\Providers\RouteServiceProvider',
+                'Laravel_Repository\Providers\UserServiceProvider',
 
 	],
 
