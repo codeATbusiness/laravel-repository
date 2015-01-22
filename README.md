@@ -20,7 +20,7 @@ Laravel_Repository\Providers\UserServiceProvider.php //Provides you one way to b
 ```
 
 Some other files that I used or changed:
-```
+```php
 //UserController
 <?php namespace Laravel_Repository\Http\Controllers;
 
