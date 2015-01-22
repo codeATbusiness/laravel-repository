@@ -114,6 +114,34 @@ class UserTableSeeder extends Seeder {
 }
 ```
 
+Within the resources\views folder I created some test view:
+
+1. The `users\index.blade.php` view to get all Users:
+
+```php
+<h1>Getting all Users:</h1>
+<br/>
+@forelse($users as $user)
+<li><a href=" {!! $user->name !!}"> {!! $user->name !!} </a></li>
+@empty
+      <p>No users</p>
+@endforelse
+```
+
+2. The `users\user.blade.php` view to get only the user by its Name:
+
+```php
+<h2>Current user is:</h2>
+<br/>
+{!! $user->name !!}
+<br/>
+{!! $user->email !!}
+<br/><br/>
+
+<a href="{!! url('users/all') !!}">Todos los usuarios</a>
+```
+
+
 If you want to change your datasource for example to Array only need follow the next steps:
 
 1. Create one class within the `Laravel_Repository\Infraestructure\Repositories` called ArrayRepository.
